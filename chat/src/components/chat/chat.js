@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { user } from "../join/join";
 import SocketIO from "socket.io-client";
 import Message from "../message/message";
-import ReactScrollToBottom from "react-scroll-to-bottom"
+import ReactScrollToBottom from "react-scroll-to-bottom";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { BsChatHeart } from "react-icons/bs"
+import { BsChatHeart } from "react-icons/bs";
 const ENDPOINT = "http://localhost:4500/";
 let socket;
 const Chat = () => {
@@ -21,21 +21,21 @@ const Chat = () => {
       alert("connected");
       setId(socket.id);
     });
-    
+
     socket.emit("joined", { user });
     socket.on("join", (data) => {
-      setMessages([...messages,data]);
+      setMessages([...messages, data]);
       console.log(data.user, data.message);
     });
 
     socket.on("joinedUser", (data) => {
-      setMessages([...messages,data]); 
+      setMessages([...messages, data]);
       console.log(data.user, data.message);
     });
 
     socket.on("leave", (data) => {
-      setMessages([...messages,data]); 
-      console.log(data.user, data.message , data.id);
+      setMessages([...messages, data]);
+      console.log(data.user, data.message, data.id);
     });
 
     return () => {
@@ -45,30 +45,41 @@ const Chat = () => {
   }, []);
   useEffect(() => {
     socket.on("sendmessage", (data) => {
-      setMessages([...messages,data]) 
+      setMessages([...messages, data]);
       console.log(data.user, data.message);
     });
     return () => {
-        socket.off();
+      socket.off();
     };
   }, [messages]);
 
   return (
-    <div className="max-w-lg xl:h-96 xl:mx-auto mx-1">
-      <div className="bg-white rounded-lg shadow-md xl:h-96" style={{ height: '100vh' }}>
-        <div className="p-2 border-b">
-          <BsChatHeart className="text-red-700 mt-2" />
-          <div className="flex xl:justify-between gap-80">
-            <h2 className="text-xl font-bold font-serif">CHATAPP</h2>
-            <a href="/">
-              <AiFillCloseCircle className="items-end" />
-            </a>
+    <div className="max-w-lg xl:h-96 xl:mx-auto mx-1 p-5">
+      <div
+        className="bg-white rounded-lg shadow-md xl:h-96"
+        style={{ height: "100vh" }}
+      >
+        <div className="p-2 border-b flex justify-between items-center w-full">
+          <div className="flex gap-2 text-xl items-center">
+            <BsChatHeart className="text-red-700" />
+            <h2 className="font-bold font-serif">CHAT APP</h2>
           </div>
+          <a href="/">
+            <AiFillCloseCircle className="text-xl" />
+          </a>
         </div>
-        <div className="p-2" style={{ height: 'calc(100vh - 150px)' }}>
-          <ReactScrollToBottom className="chatBox overflow-y-auto" style={{ maxHeight: '' }}>
+        <div className="p-2" style={{ height: "calc(100vh - 150px)" }}>
+          <ReactScrollToBottom
+            className="chatBox overflow-y-auto"
+            style={{ maxHeight: "" }}
+          >
             {messages.map((item, i) => (
-              <Message key={i} user={item.id === id ? '' : item.user} message={item.message} classs={item.id === id ? 'left' : 'right'} />
+              <Message
+                key={i}
+                user={item.id === id ? "" : item.user}
+                message={item.message}
+                classs={item.id === id ? "left" : "right"}
+              />
             ))}
           </ReactScrollToBottom>
         </div>
