@@ -75,6 +75,9 @@ const Chat = () => {
         <div className="p-2 border-t">
           <div className="flex">
             <input
+            onKeyDown={(e) =>
+              e.key === 'Enter' ? send() : null
+            }
               type="text"
               placeholder="Type your message..."
               className="flex-grow border rounded-full py-2 px-4 focus:outline-none focus:ring"
