@@ -6,10 +6,6 @@ const socketIO = require("socket.io");
 const server = http.createServer(app);
 const PORT = 4500 || process.env.PORT
 const users = [];
-app.use(cors({
-    origin: "https://baat-karo-zn84.vercel.app",
-    credentials: true,
-}));
 app.get('/',(req,res)=>{
     res.send("Hello Gitesh")
 })
