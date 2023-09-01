@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const socketIO = require("socket.io");
 const server = http.createServer(app);
-const PORT = process.env.PORT
+const PORT = 4500 || process.env.PORT
 const users = [];
 app.get('/',(req,res)=>{
     res.send("Hello Gitesh")

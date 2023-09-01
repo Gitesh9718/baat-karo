@@ -5,7 +5,7 @@ import Message from "../message/message";
 import ReactScrollToBottom from "react-scroll-to-bottom";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BsChatHeart } from "react-icons/bs";
-const ENDPOINT = "https://baat-karo-h9k7.vercel.app";
+const ENDPOINT = "https://baat-karo-h9k7.vercel.app/";
 let socket;
 const Chat = () => {
   const [id, setId] = useState(" ");
